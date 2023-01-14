@@ -20,9 +20,8 @@ class App extends React.Component {
           <Route exact path="/Favorites" component={ Favorites } />
           <Route exact path="/Profile" component={ Profile } />
           <Route exact path="/Profile/Edit" component={ ProfileEdit } />
-          <Route exact path="#" component={ NotFound }>
-            <NotFound />
-          </Route>
+          <Route exact path="*" component={ NotFound } />
+          {/* Lembrar: https://stackoverflow.com/questions/32128978/react-router-no-not-found-route */}
         </Switch>
       </div>
     );
