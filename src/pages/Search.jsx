@@ -1,10 +1,33 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends React.Component {
   state = {
-    isBtnDisabble: true,
     search: '',
+    artistName: '',
+    albums: [],
+    isBtnDisabble: true,
+    gotApi: false,
+    neverSearch: true,
+  };
+
+  handleSearch = async (event) => {
+    event.preventDefault();
+    const { search } = this.state;
+    this.setState({
+      search: '',
+      neverSearch: false,
+    });
+
+    const success = await searchAlbumsAPI(search);
+
+    this.setState({
+      gotApi: true,
+      artistName: search,
+      albums: success,
+    });
   };
 
   handleValidation = () => {
@@ -29,7 +52,12 @@ class Search extends React.Component {
   };
 
   render() {
-    const { isBtnDisabble } = this.state;
+    const { isBtnDisabble,
+      search,
+      gotApi,
+      artistName,
+      albums,
+      neverSearch } = this.state;
 
     return (
       <div data-testid="page-search">
@@ -42,6 +70,7 @@ class Search extends React.Component {
                 type="text"
                 name="search"
                 id="search"
+                value={ search }
                 data-testid="search-artist-input"
                 onChange={ this.handleChange }
               />
@@ -51,11 +80,29 @@ class Search extends React.Component {
                 type="button"
                 data-testid="search-artist-button"
                 disabled={ isBtnDisabble }
+                onClick={ this.handleSearch }
               >
                 Procurar
               </button>
             </div>
           </form>
+          <p>{`Resultado de álbuns de: ${artistName}`}</p>
+          {(!neverSearch && !gotApi) && <p>Nenhum álbum foi encontrado</p>}
+          {(gotApi) && albums.map((element) => (
+            <div key={ element.collectionId }>
+              <span>{`Nome do artista: ${element.artistName}`}</span>
+              <span>{`Album: ${element.collectionName}`}</span>
+              Capa:
+              <span>
+                <img src={ element.artworkUr1100 } alt={ element.collectionName } />
+              </span>
+              <Link
+                to={ `album/${element.collectionId}` }
+                data-testid={ `link-to-album-${element.collectionId}` }
+              >
+                Album
+              </Link>
+            </div>))}
         </div>
       </div>
     );
