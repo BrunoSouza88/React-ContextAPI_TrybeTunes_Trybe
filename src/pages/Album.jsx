@@ -12,18 +12,18 @@ class Album extends React.Component {
   };
 
   componentDidMount() {
-    this.getMusic();
+    this.getMusics();
   }
 
-  getMusic = async () => {
+  getMusics = async () => {
     const { match: { params: { id } } } = this.props;
 
-    const musics = async () => {
+    const getMusic = async () => {
       const album = await getMusics(id);
       return album;
     };
 
-    musics().then((data) => {
+    getMusic().then((data) => {
       this.setState({
         artist: data[0].artistName,
         song: data,
