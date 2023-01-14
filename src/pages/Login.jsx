@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   state = {
@@ -42,7 +43,7 @@ class Login extends React.Component {
   render() {
     const { isBtnDisabled, loading } = this.state;
 
-    if (loading) return <h3>Carregando...</h3>;
+    if (loading) return <Loading />;
 
     return (
       <div data-testid="page-login">

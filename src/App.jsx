@@ -19,7 +19,7 @@ class App extends React.Component {
           <Route exact path="/Album/:id" component={ Album } />
           <Route exact path="/Favorites" component={ Favorites } />
           <Route exact path="/Profile" component={ Profile } />
-          <Route exact path="/ProfileEdit" component={ ProfileEdit } />
+          <Route exact path="/Profile/Edit" component={ ProfileEdit } />
           <Route exact path="#" component={ NotFound }>
             <NotFound />
           </Route>
