@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
+import INITIAL_STATE from '../services/initialState';
 
 class Login extends React.Component {
   state = {
-    isBtnDisabled: true,
-    userName: '',
-    loading: false,
+    ...INITIAL_STATE,
   };
 
   handleValidation = () => {

@@ -2,15 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import INITIAL_STATE from '../services/initialState';
 
 class Search extends React.Component {
   state = {
-    search: '',
-    artistName: '',
-    albums: [],
-    isBtnDisabble: true,
-    gotApi: false,
-    neverSearch: true,
+    ...INITIAL_STATE,
   };
 
   handleSearch = async (event) => {
@@ -64,7 +60,7 @@ class Search extends React.Component {
         <Header />
         <p>Esse é o Search</p>
         <div data-testid="page-login">
-          <form>
+          <form onSubmit={ this.handleSearch }>
             <div>
               <input
                 type="text"

@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import INITIAL_STATE from '../services/initialState';
 
 class MusicCard extends React.Component {
   state = {
-    loading: false,
-    checked: false,
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {
@@ -19,8 +19,8 @@ class MusicCard extends React.Component {
 
     if (favoritesSongs.some((element) => element.trackId === song.trackId)) {
       this.setState({
-        loading: false,
         checked: true,
+        loading: false,
       });
     }
   };
@@ -30,16 +30,19 @@ class MusicCard extends React.Component {
     const { checked } = this.state;
 
     if (!checked) {
-      this.setState({ loading: true }, () => {
+      this.setState({
+        loading: true }, () => {
         addSong(song).then(() => {
           this.setState({
             loading: false,
             checked: true,
           });
+          console.log(song);
         });
       });
     } else {
-      this.setState({ loading: true }, () => {
+      this.setState({
+        loading: true }, () => {
         removeSong(song).then(() => {
           this.setState({
             loading: false,
@@ -54,6 +57,7 @@ class MusicCard extends React.Component {
   render() {
     const { loading, checked } = this.state;
     const { trackName, previewUrl, trackId } = this.props;
+
     return (
       <div>
         <h3>
@@ -66,7 +70,7 @@ class MusicCard extends React.Component {
           <code>audio</code>
         </audio>
         <label htmlFor={ trackId }>
-          {loading ? <Loading /> : 'Favorita'}
+          {loading ? <Loading /> : 'Favoritar'}
           <input
             type="checkbox"
             id={ trackId }

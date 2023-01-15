@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import INITIAL_STATE from '../services/initialState';
 
 class Header extends React.Component {
   state = {
-    userName: '',
-    loading: false,
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {

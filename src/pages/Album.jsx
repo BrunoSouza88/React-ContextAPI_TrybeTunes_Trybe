@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import INITIAL_STATE from '../services/initialState';
 
 class Album extends React.Component {
   state = {
-    artist: '',
-    album: '',
-    song: [],
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {
@@ -46,13 +45,13 @@ class Album extends React.Component {
         </div>
         <div>
           {song.map((element) => (
-            (element.kind === 'song') && (
+            element.kind === 'song' && (
               <MusicCard
                 key={ element.trackName }
                 trackName={ element.trackName }
                 previewUrl={ element.previewUrl }
                 trackId={ element.trackId }
-                song={ song }
+                song={ element }
               />
             )
           ))}
