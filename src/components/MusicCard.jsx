@@ -37,7 +37,6 @@ class MusicCard extends React.Component {
             loading: false,
             checked: true,
           });
-          console.log(song);
         });
       });
     } else {
