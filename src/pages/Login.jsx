@@ -46,7 +46,7 @@ class Login extends React.Component {
 
     return (
       <div data-testid="page-login">
-        <form onSubmit={ this.onSaveButtonClick }>
+        <form onSubmit={ this.handleClick }>
           <label htmlFor="input-name">
             Nome:
             <input
