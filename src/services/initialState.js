@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   album: '',
   search: '',
   artistName: '',
+  favoriteSongs: [],
   song: [],
   albums: [],
   gotApi: false,
