@@ -15,7 +15,6 @@ class Favorites extends React.Component {
 
   handleFavoritesSongs = async () => {
     const favoritesSongsList = await getFavoriteSongs();
-    const { checked } = this.state;
 
     this.setState({
       favoriteSongs: favoritesSongsList,
